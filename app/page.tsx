@@ -22,8 +22,17 @@ const NOTICES = [
     href: "/events" as const,
   },
   {
-    id: "visit",
+    id: "gallery",
     n: "03",
+    label: "Gallery",
+    body:
+      "The room, the fire, the food, the wine. Twenty-three frames — no captions, no order.",
+    cta: "Look around",
+    href: "/gallery" as const,
+  },
+  {
+    id: "visit",
+    n: "04",
     label: "Visit",
     body: `${SITE.address.street}, ${SITE.address.city}. Monday to Saturday, 12:30 — 15:00 and 18:00 — 24:00. Closed Sundays.`,
     cta: "Open the map",
@@ -32,7 +41,7 @@ const NOTICES = [
   },
   {
     id: "reserve",
-    n: "04",
+    n: "05",
     label: "Reserve",
     body:
       "Twelve tables. Eight counter seats. Walk-ins welcome at the bar — for the rest, we confirm within twelve hours.",
