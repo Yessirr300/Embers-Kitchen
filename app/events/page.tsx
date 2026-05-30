@@ -1,55 +1,65 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Footer } from "@/components/sections/Footer";
-import { SplitText } from "@/components/animations/SplitText";
-import { Button } from "@/components/ui/Button";
 import { EVENTS } from "@/content/events";
 
 export const metadata: Metadata = {
   title: "Events",
   description:
-    "Vinyl & Wine Nights, Chef's Table Saturdays, Greek Heritage Dinners and Teppanyaki Theatre at Embers Kitchen in Limassol.",
+    "Vinyl & Wine, Chef's Table, Greek Heritage Dinners and Open-Fire Theatre at Embers Kitchen, Limassol.",
 };
 
 export default function EventsPage() {
   return (
     <>
-      <section className="relative pt-40 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-paper paper-grain">
-        <div className="container-x relative">
-          <div className="text-eyebrow">— Tables & Sessions</div>
-          <h1 className="text-display mt-6 text-ink text-[clamp(2rem,5vw,5rem)] max-w-5xl">
-            <SplitText text="The room is" />
-            <br />
-            <span className="italic text-muted">
-              <SplitText text="always listening." delay={0.2} />
-            </span>
-          </h1>
-          <div className="mt-8">
-            <Button href="/reservations" variant="primary">Reserve a Seat</Button>
-          </div>
+      <section className="container-x pt-20 md:pt-28 pb-12 md:pb-16">
+        <div className="text-eyebrow">02 — Events</div>
+        <h1 className="text-display mt-8 text-ink italic text-[clamp(56px,12vw,160px)]">
+          Events
+        </h1>
+        <p className="mt-10 max-w-xl text-ink/85 text-lg leading-snug">
+          Four quiet rituals. The room sits with one fire and listens.
+        </p>
+        <div className="mt-10">
+          <Link href="/reservations" className="link-arrow">
+            Reserve a seat <span aria-hidden>→</span>
+          </Link>
         </div>
       </section>
 
-      <section className="py-24 md:py-32 bg-paper paper-grain">
-        <div className="container-x">
-          <ul className="divide-y divide-ink/10 border-t border-b border-ink/10">
-            {EVENTS.map((e) => (
-              <li key={e.id} className="py-10 md:py-12 grid md:grid-cols-12 gap-6">
-                <div className="md:col-span-3">
-                  <div className="text-eyebrow">{e.tag}</div>
-                  <div className="mt-3 text-ink font-medium">{e.date}</div>
-                  <div className="text-muted text-sm">{e.time}</div>
-                </div>
-                <div className="md:col-span-9">
-                  <h2 className="text-display text-ink text-[clamp(1.5rem,3vw,2.5rem)]">{e.title}</h2>
-                  <div className="text-muted italic mt-1">{e.subtitle}</div>
-                  <p className="text-ink/80 mt-4 max-w-2xl">{e.description}</p>
-                  {e.price && <div className="mt-3 text-sm text-muted">{e.price}</div>}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <hr className="border-0 border-t border-hairline" />
+
+      <section className="container-x py-20 md:py-28">
+        <ul className="divide-y divide-hairline border-y border-hairline">
+          {EVENTS.map((e, i) => (
+            <li
+              key={e.id}
+              className="py-10 md:py-14 grid gap-6 md:grid-cols-[180px_1fr]"
+            >
+              <div className="flex flex-col gap-2">
+                <span className="text-meta text-muted">
+                  {String(i + 1).padStart(2, "0")} — {e.tag}
+                </span>
+                <span className="text-ink text-[15px]">{e.date}</span>
+                <span className="text-muted text-[13px]">{e.time}</span>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h2 className="text-display italic text-ink text-[clamp(28px,4vw,44px)]">
+                  {e.title}
+                </h2>
+                <span className="text-muted italic">{e.subtitle}</span>
+                <p className="text-ink/85 text-[16px] leading-relaxed max-w-2xl mt-2">
+                  {e.description}
+                </p>
+                {e.price && (
+                  <span className="text-meta text-muted mt-2">{e.price}</span>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
+
       <Footer />
     </>
   );

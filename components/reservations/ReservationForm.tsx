@@ -96,7 +96,7 @@ export function ReservationForm() {
   }
 
   return (
-    <div className="relative rounded-xl border border-hairline bg-paper-soft/85 backdrop-blur-md p-6 md:p-10 ink-shadow">
+    <div className="relative border-t border-b border-hairline py-10 md:py-12">
       {/* Progress */}
       <div className="flex items-center gap-3 mb-8">
         {[0, 1, 2, 3].map((i) => (

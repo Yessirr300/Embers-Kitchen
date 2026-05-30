@@ -1,42 +1,37 @@
 import type { Metadata, Viewport } from "next";
 import { ebGaramond, inter, jetbrains } from "./fonts";
 import "./globals.css";
-import { SmoothScrollProvider } from "@/components/shared/SmoothScrollProvider";
-import { Cursor } from "@/components/shared/Cursor";
-import { Loader } from "@/components/shared/Loader";
 import { Navbar } from "@/components/navigation/Navbar";
 import { SITE } from "@/content/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://emberskitchen.com"),
   title: {
-    default: "Embers Kitchen · Open-Fire Greek Grill · Limassol",
-    template: "%s · Embers Kitchen Limassol",
+    default: "Embers Kitchen — Open-Fire Greek Grill, Limassol",
+    template: "%s — Embers Kitchen, Limassol",
   },
   description:
-    "A small dining room built around one fire — open-fire Greek and Cypriot grill, raw plates from the Limassol day-boats, curated natural wines and vinyl on Gladstonos 94.",
+    "A small dining room built around one fire. Greek-Cypriot grill, natural wine and vinyl on Gladstonos 94, Limassol.",
   keywords: [
     "Embers Kitchen",
     "Limassol restaurant",
-    "fine dining Limassol",
     "open fire grill",
     "Greek Cypriot restaurant",
     "natural wine Cyprus",
     "Gladstonos 94",
-    "feggaraki",
   ],
   openGraph: {
     type: "website",
-    title: "Embers Kitchen · Limassol",
+    title: "Embers Kitchen — Limassol",
     description:
-      "Open-fire Greek grill. Vinyl, natural wine, twelve tables — at Gladstonos 94, Limassol.",
+      "Open-fire Greek grill. Vinyl, natural wine, twelve tables — Gladstonos 94, Limassol.",
     siteName: "Embers Kitchen",
     url: "/",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Embers Kitchen · Limassol",
+    title: "Embers Kitchen — Limassol",
     description: "Open-fire Greek grill in Limassol.",
   },
   alternates: { canonical: "/" },
@@ -44,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#f4f1ea",
   width: "device-width",
   initialScale: 1,
 };
@@ -88,19 +83,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${ebGaramond.variable} ${inter.variable} ${jetbrains.variable}`}
-      suppressHydrationWarning
     >
-      <body className="bg-paper text-ink selection:bg-ink selection:text-paper">
+      <body className="bg-paper text-ink selection:bg-ink selection:text-paper antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantSchema) }}
         />
-        <Loader />
-        <Cursor />
-        <SmoothScrollProvider>
-          <Navbar />
-          <main className="relative">{children}</main>
-        </SmoothScrollProvider>
+        <Navbar />
+        <main className="relative">{children}</main>
       </body>
     </html>
   );
