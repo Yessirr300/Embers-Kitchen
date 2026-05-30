@@ -1,26 +1,164 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand palette — paper & ink, strictly monochrome */
+  --color-paper: #f6f3ec;
+  --color-paper-soft: #efeae0;
+  --color-paper-deep: #e6dfd1;
+  --color-ink: #141413;
+  --color-ink-soft: #2a2925;
+  --color-muted: #76716a;
+  --color-muted-soft: #a39d92;
+  --color-hairline: rgba(20, 20, 19, 0.10);
+  --color-ember: #b23a1f;
+
+  /* Semantic aliases */
+  --color-background: #f6f3ec;
+  --color-foreground: #141413;
+  --color-primary: #141413;
+  --color-primary-foreground: #f6f3ec;
+
+  /* Fonts */
+  --font-display: var(--font-eb-garamond);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Animation */
+  --ease-cinema: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: light;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    overscroll-behavior-y: none;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* Native cursor stays visible; custom cursor is a hover decoration only. */
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-paper);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-paper-deep);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink);
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  /* Focus rings */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Photos kept in full colour. */
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .container-x { padding-inline: 2.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .container-x { padding-inline: 4rem; }
+  }
+  @media (min-width: 1536px) {
+    .container-x { padding-inline: 6rem; }
+  }
+
+  .text-display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .text-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
 }
