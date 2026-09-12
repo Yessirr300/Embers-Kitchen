@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+node_modules/
+.next/
+out/
+dist/
+.env
+.env.*
+._*
+_materials/
+*.mov
+*.MOV
+*.mp4
+*.zip
+*.tar.gz
+*.tgz
+*.dmg
